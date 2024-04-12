@@ -86,16 +86,9 @@ __webpack_require__.r(__webpack_exports__);
     chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
       if (request.click === "sendurl" && MainLoading.value === true && HostStatus.value === true && tableLoading.value === true) {
         FofaApiKey.value = getFofaApiKey();
-        getHostFocus(resData => {
-          chrome.runtime.sendMessage({
-            'cmd': 'sendfocusData',
-            'hostname': urldata.value,
-            'focusData': resData
-          }, response => {
-            console.log("sendfocusData res", response);
-          });
+        getHostFocus(() => {
+          // console.log("getHostFocus res",response)
         });
-        return;
       }
       sendResponse("sendData OK---------");
       return true;
